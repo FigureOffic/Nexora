@@ -89,7 +89,7 @@ DEFAULTS = {
     "ely_access_token": "",   # хранится зашифрованным
     "cape_mod_ok": False,
     "custom_servers": [],
-    "update_url": "https://api.github.com/repos/FigureOffic/NexoraLauncher/releases/latest",
+    "update_url": "https://api.github.com/repos/FigureOffic/Nexora/releases/latest",
     # --- расширенные ---
     "gc": "G1",
     "aikar_flags": True,
