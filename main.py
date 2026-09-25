@@ -139,7 +139,44 @@ APPEARANCE_KEYS = ["theme", "accent", "radius", "scale", "anim", "anim_speed", "
 T = {}
 FONT = {"title": "Segoe UI", "body": "Segoe UI", "loaded": []}
 ANIM = {"on": True, "speed": 1.0}
+PERF_MODS = [
+    "fabric-api", "sodium", "lithium", "ferrite-core", "immediatelyfast",
+    "entityculling", "iris", "indium", "modmenu", "reeses-sodium-options", "sodium-extra",
+    "lazy-language-loader", "krypton", "modernfix", "dynamic-fps",
+    "moreculling", "debugify",
+]
 
+BROKEN_MOD_PREFIXES = [
+    "cullleaves-", "cull-leaves-",
+    "starlight-", "fastload-", "smoothboot-", "memoryleakfix-",
+]
+
+ULTRA_JVM = [
+    "-XX:+UnlockExperimentalVMOptions",
+    "-XX:+AlwaysPreTouch",
+    "-XX:+DisableExplicitGC",
+    "-XX:+UseNUMA",
+    "-XX:NmethodSweepActivity=1",
+    "-XX:ReservedCodeCacheSize=400M",
+    "-XX:NonNMethodCodeHeapSize=12M",
+    "-XX:ProfiledCodeHeapSize=194M",
+    "-XX:NonProfiledCodeHeapSize=194M",
+    "-XX:-DontCompileHugeMethods",
+    "-XX:MaxNodeLimit=240000",
+    "-XX:NodeLimitFudgeFactor=8000",
+    "-XX:+UseCompressedOops",
+]
+
+
+def purge_broken_mods(mods_dir: Path):
+    if not mods_dir.exists():
+        return
+    for f in mods_dir.iterdir():
+        if f.is_file() and f.suffix == ".jar" and any(f.name.lower().startswith(p) for p in BROKEN_MOD_PREFIXES):
+            try:
+                f.unlink()
+            except Exception:
+                pass
 # ====================================================================
 #  Безопасность: ключ + шифрование
 # ====================================================================
